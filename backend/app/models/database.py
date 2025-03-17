@@ -5,7 +5,7 @@ from sqlalchemy.exc import SQLAlchemyError
 import os
 from dotenv import load_dotenv
 from app.models.models import Designer, Look
-from app.models.base import Base  # Import Base from the new file
+from app.models.base import Base  
 
 # Load environment variables
 load_dotenv()
@@ -63,8 +63,8 @@ def save_to_db(db_session: Session, img_url: str, designer_name: str, season: st
         db_session.add(new_look)
         db_session.commit()
 
-        print(f"✅ Look saved to DB: {img_url}")
+        print(f"Look saved to DB: {img_url}")
 
     except SQLAlchemyError as e:
         db_session.rollback()  # Rollback in case of error
-        print(f"⚠ Error saving look to DB: {str(e)}")
+        print(f"Error saving look to DB: {str(e)}")

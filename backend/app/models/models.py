@@ -42,10 +42,10 @@ class Look(Base):
     id = Column(PG_UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     designer_id = Column(PG_UUID(as_uuid=True), ForeignKey("designers.id", ondelete="CASCADE"), nullable=False)
     season = Column(String(20))
-    gender = Column(String(10), nullable=False)  # "Men", "Women", "Unisex"
+    gender = Column(String(10), nullable=False)  
     collection_type = Column(String(20), nullable=False)  # "Ready-to-Wear", "Haute Couture"
     image_url = Column(Text, unique=True, nullable=False)
-    description = Column(Text, nullable=True)  # Optional field for extra metadata
+    description = Column(Text, nullable=True)  
     created_at = Column(TIMESTAMP, default=func.now(), nullable=True)
 
     # Relationships
