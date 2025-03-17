@@ -3,7 +3,7 @@ from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 import uuid
-from .database import Base
+from app.models.base import Base
 
 # Users Table
 class User(Base):
@@ -42,8 +42,11 @@ class Look(Base):
     id = Column(PG_UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     designer_id = Column(PG_UUID(as_uuid=True), ForeignKey("designers.id", ondelete="CASCADE"), nullable=False)
     season = Column(String(20))
+    gender = Column(String(10), nullable=False)  # "Men", "Women", "Unisex"
+    collection_type = Column(String(20), nullable=False)  # "Ready-to-Wear", "Haute Couture"
     image_url = Column(Text, unique=True, nullable=False)
-    created_at = Column(TIMESTAMP, default=func.now(), nullable=False)
+    description = Column(Text, nullable=True)  # Optional field for extra metadata
+    created_at = Column(TIMESTAMP, default=func.now(), nullable=True)
 
     # Relationships
     designer = relationship("Designer", back_populates="looks")
