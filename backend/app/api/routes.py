@@ -49,16 +49,16 @@ def save_user_preference(request: UserPreferenceRequest, db: Session = Depends(g
     return preference
 
 
-# # Get all liked looks for a user
-# @router.get("/user/preferences/{user_id}", response_model=list[LookResponse])
-# def get_user_preferences(user_id: uuid.UUID, db: Session = Depends(get_db)):
-#     looks = (
-#         db.query(Look)
-#         .join(UserPreference, Look.id == UserPreference.look_id)
-#         .filter(UserPreference.user_id == user_id, UserPreference.preference == True)
-#         .all()
-#     )
-#     return looks
+# Get all liked looks for a user
+@router.get("/user/preferences/{user_id}", response_model=list[LookResponse])
+def get_user_preferences(user_id: uuid.UUID, db: Session = Depends(get_db)):
+    looks = (
+        db.query(Look)
+        .join(UserPreference, Look.id == UserPreference.look_id)
+        .filter(UserPreference.user_id == user_id, UserPreference.preference == True)
+        .all()
+    )
+    return looks
 
 # Create a new user
 @router.post("/users", response_model=UserResponse)
