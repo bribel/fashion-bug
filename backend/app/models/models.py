@@ -4,7 +4,6 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 import uuid
 from app.models.base import Base
-from passlib.context import CryptContext
 
 
 # Users Table
