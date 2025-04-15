@@ -17,7 +17,6 @@ class LookResponse(BaseModel):
 
 # Schema for creating a new user preference (liking/disliking a look)
 class UserPreferenceRequest(BaseModel):
-    user_id: uuid.UUID
     look_id: uuid.UUID
     preference: bool  # True = Liked, False = Disliked
 

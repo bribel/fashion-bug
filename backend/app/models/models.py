@@ -5,6 +5,7 @@ from sqlalchemy.sql import func
 import uuid
 from app.models.base import Base
 
+
 # Users Table
 class User(Base):
     __tablename__ = "users"
