@@ -1,0 +1,396 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: #fff;
+  color: #111;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 32px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.navbar-logo {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.navbar-actions span {
+  color: #666;
+}
+
+.navbar-btn {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border: 1px solid #111;
+  transition: background 0.15s, color 0.15s;
+}
+
+.navbar-btn:hover {
+  background: #111;
+  color: #fff;
+}
+
+.navbar-btn.secondary {
+  border-color: #ccc;
+  color: #666;
+}
+
+.navbar-btn.secondary:hover {
+  background: #f5f5f5;
+  color: #111;
+}
+
+/* Look Grid */
+.grid-container {
+  padding: 32px;
+}
+
+.grid-header {
+  margin-bottom: 24px;
+}
+
+.grid-header h1 {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #666;
+}
+
+.look-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .look-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .look-grid {
+    grid-template-columns: 1fr;
+  }
+  .grid-container {
+    padding: 16px;
+  }
+}
+
+/* Look Card */
+.look-card {
+  position: relative;
+  cursor: pointer;
+}
+
+.look-card-image-wrap {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background: #f2f2f2;
+}
+
+.look-card-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.look-card:hover .look-card-image-wrap img {
+  transform: scale(1.02);
+}
+
+.look-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.38);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.look-card:hover .look-card-overlay {
+  opacity: 1;
+}
+
+.look-card-overlay button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.look-card-overlay button:hover {
+  transform: scale(1.12);
+  background: #fff;
+}
+
+.look-card-overlay .btn-like:hover {
+  color: #c0392b;
+}
+
+.look-card-overlay .btn-dislike:hover {
+  color: #555;
+}
+
+.look-card-overlay .btn-like.active {
+  background: #c0392b;
+  color: #fff;
+}
+
+.look-card-overlay .btn-dislike.active {
+  background: #222;
+  color: #fff;
+}
+
+/* Confirm modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  background: #fff;
+  padding: 36px 32px;
+  max-width: 360px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.modal-message {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  color: #111;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.modal-btn {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 9px 18px;
+  border: 1px solid #111;
+  transition: background 0.15s, color 0.15s;
+}
+
+.modal-btn--cancel {
+  border-color: #ccc;
+  color: #666;
+}
+
+.modal-btn--cancel:hover {
+  background: #f5f5f5;
+  color: #111;
+}
+
+.modal-btn--confirm {
+  background: #111;
+  color: #fff;
+}
+
+.modal-btn--confirm:hover {
+  background: #333;
+}
+
+/* Undo bar */
+.undo-bar {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 24px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  z-index: 50;
+}
+
+.undo-bar-btn {
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.15s;
+}
+
+.undo-bar-btn:hover {
+  opacity: 0.7;
+}
+
+.look-card-info {
+  padding: 8px 0 16px;
+}
+
+.look-card-designer {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.look-card-meta {
+  font-size: 11px;
+  color: #888;
+  margin-top: 2px;
+  letter-spacing: 0.04em;
+}
+
+/* Auth pages */
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 73px);
+  padding: 40px 16px;
+}
+
+.auth-form {
+  width: 100%;
+  max-width: 360px;
+}
+
+.auth-form h2 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+
+.form-field {
+  margin-bottom: 16px;
+}
+
+.form-field label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 6px;
+}
+
+.form-field input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.form-field input:focus {
+  border-color: #111;
+}
+
+.form-submit {
+  width: 100%;
+  padding: 12px;
+  background: #111;
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 8px;
+  transition: background 0.15s;
+}
+
+.form-submit:hover {
+  background: #333;
+}
+
+.form-error {
+  font-size: 12px;
+  color: #c0392b;
+  margin-top: 12px;
+}
+
+.form-link {
+  font-size: 12px;
+  color: #666;
+  margin-top: 20px;
+  letter-spacing: 0.04em;
+}
+
+.form-link a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Loading / empty states */
+.state-message {
+  padding: 80px 32px;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #aaa;
+}

@@ -2,25 +2,34 @@ from pydantic import BaseModel, EmailStr
 import uuid
 from typing import Optional
 
-# Schema for returning Look data
-class LookResponse(BaseModel):
+
+class DesignerResponse(BaseModel):
     id: uuid.UUID
-    designer_id: uuid.UUID
-    season: str
-    gender: str
-    collection_type: str
-    image_url: str
-    description: Optional[str] = None  # Optional field
+    name: str
 
     class Config:
         from_attributes = True
 
-# Schema for creating a new user preference (liking/disliking a look)
+
+class LookResponse(BaseModel):
+    id: uuid.UUID
+    designer_id: uuid.UUID
+    designer: Optional[DesignerResponse] = None
+    season: Optional[str] = None
+    gender: str
+    collection_type: str
+    image_url: str
+    description: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+
 class UserPreferenceRequest(BaseModel):
     look_id: uuid.UUID
-    preference: bool  # True = Liked, False = Disliked
+    preference: bool  # True = liked, False = disliked
 
-# Schema for returning a user's preferences
+
 class UserPreferenceResponse(BaseModel):
     id: uuid.UUID
     user_id: uuid.UUID
@@ -30,17 +39,17 @@ class UserPreferenceResponse(BaseModel):
     class Config:
         from_attributes = True
 
-# Schema for user registration
+
 class UserCreate(BaseModel):
     username: str
     email: EmailStr
-    password: str  # Plain text password for input
+    password: str
 
-# Schema for returning user data (excluding password)
+
 class UserResponse(BaseModel):
     id: uuid.UUID
     username: str
     email: str
 
     class Config:
-        from_attributes = True  # Ensures SQLAlchemy compatibility
+        from_attributes = True
